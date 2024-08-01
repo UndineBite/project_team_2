@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIT - Leading Planner for Women in Tech</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <script src="https://kit.fontawesome.com/97c2cfe72c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <a href="./landing.html" class="logo"> LIT PLANNER</a>
+    <ul class="navbar">
+      <li class="navlink">
+        <a href="#">MY PLANNER</a>
+        <ul class="drop-down">
+          <li><a href="#">MY TRIPS</a></li>
+          <li><a href="#">MY PLANS</a></li>
+          <li><a href="#">NETWORK</a></li>
+          <li><a href="#">EVENTS</a></li>
+        </ul>
+      </li>
+      <ul>
+      <li><a href="#">LOG OUT</a></li>
+    </ul>
+
+    </ul>
+    <div class="bx bx-menu" id="menu-icon"></div>
+  </div>
+  </header>
+      <!-- Main container for the reminders/notes -->
+    <div class="main-content">
+      <div class="container">
+        <div class="left_section">
+            <div class="subheader-container">
+                <div class="header">
+                    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">+</button>
+                    Reminder
+                </div>
+            </div>
+            <div id="id01" class="modal">
+                <div class="modal-content">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close-button">&times;</span>
+                    <form id="mainForm">
+                        <div class="input-group">
+                            <label for="title" class="label-title">Title</label>
+                            <input type="text" id="title" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="description" class="label-title">Description of task</label>
+                            <textarea id="description" required></textarea>
+                        </div>
+                        <button type="submit">Add</button>
+                        <button type="reset">Clear</button>
+                    </form>
+                </div>
+            </div>
+            <!-- This is what will display the reminders -->
+            <div class="content">
+                <div class="main-container">
+                    <div class="table">
+                        <div class="table-header">
+                            <h4>Title</h4>
+                            <h4>Description</h4>
+                            <h4>Status</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_section">
+            <div class="subheader-container">
+                <div class="header">
+                    Notes
+                </div>
+            </div>
+            <div class="content" contenteditable="true" onblur="savetNote()">
+            </div>
+        </div>
+    </div>    
+
+	<!-- Main wrapper for the calendar application -->
+    <div class="wrapper">
+        <div id="event-section">
+            <h3>Events</h3>
+            <!-- List to display events added by the user -->
+            <ul id="eventList">
+                <li data-event-id="1">
+                    <strong>Event Title</strong> - Event Description on Event Date
+                    <button class="delete-event" onclick="deleteEvent(1)">Delete</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-calendar">
+            <div id="left">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adding_event">
+                    Add event
+                </button>
+                <!-- Modal for adding events -->
+                <div class="modal fade" id="adding_event" aria-hidden="true">
+                    <!-- This allows you to add the modal in the calendar -->
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-contents">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <!-- This is for the closing button -->
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- This is the modal form -->
+                            <div class="modal-body">
+                                <div id="event-section">
+                                    <h3>Add Event</h3>
+                                    <input type="date" id="eventDate" class="form-control">
+                                    <input type="text" id="eventTitle" class="form-control" placeholder="Event Title">
+                                    <input type="text" id="eventDescription" class="form-control" placeholder="Event Description">
+                                    <button id="addEvent" class="btn btn-success mt-3" onclick="addEvent()">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- This is considered the right side of the page-->
+            <div id="right">
+                <h3 id="monthAndYear"></h3>
+                <div class="button-container-calendar">
+                    <button id="previous" onclick="previous()">‹</button>
+                    <button id="next" onclick="next()">›</button>
+                </div>
+                <table class="table-calendar" id="calendar" data-lang="en">
+                    <thead id="thead-month"></thead>
+                    <!-- Table body for displaying the calendar -->
+                    <tbody id="calendar-body"></tbody>
+                </table>
+                <div class="footer-container-calendar">
+                    <label for="month">Jump To: </label>
+                    <!-- Dropdowns to select a specific month and year -->
+                    <select id="month" onchange="jump()">
+                        <option value=0>Jan</option>
+                        <option value=1>Feb</option>
+                        <option value=2>Mar</option>
+                        <option value=3>Apr</option>
+                        <option value=4>May</option>
+                        <option value=5>Jun</option>
+                        <option value=6>Jul</option>
+                        <option value=7>Aug</option>
+                        <option value=8>Sep</option>
+                        <option value=9>Oct</option>
+                        <option value=10>Nov</option>
+                        <option value=11>Dec</option>
+                    </select>
+                    <!-- Dropdown to select a specific year -->
+                    <select id="year" onchange="jump()"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+        <footer>
+          <h2>Plan. Connect. Inspire</h2>
+          <div class="socialmidia">
+            <a href="#"><i  class="fa-brands fa-facebook fa-2xl"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram fa-2xl"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter fa-2xl"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter fa-2xl"></i></a>
+            <p>All Copyrights reserved &copy 2024 LIT - Leading Planner for Women in Tech</p>
+        </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
