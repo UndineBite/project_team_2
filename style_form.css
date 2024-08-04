@@ -20,7 +20,9 @@
     background: transparent;
     background-color: purple;
    }
-  
+  a {
+    color: white;
+  }
    .logo {
     font-size: 40px;
     font-weight: 600;
