@@ -308,7 +308,7 @@ function showCalendar(month, year) {
 				cell.setAttribute("data-year", year);
 				cell.setAttribute("data-month_name", months[month]);
 				cell.className = "date-picker";
-				cell.innerHTML = "<span>" + date + "</span";
+				cell.innerHTML = "<span>" + date + "</span>";
 
 				if (
 					date === today.getDate() &&
@@ -392,6 +392,3 @@ function loadNotes() {
         document.querySelector('.content').innerHTML = savedContent;
     }
 }
-
-// Load the saved notes when the page loads
-window.onload = loadNotes;
